@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.6" type="plugin" group="content"	method="upgrade">
+	<name>Multithumb</name>
+	<author>Boris Komraz | Until Version 2.0 alpha 3 for Joomla 1.5 Martin Larsen</author>
+	<creationDate>2015-Jun-25</creationDate>
+	<copyright>(C) 2007-2008 Martin Larsen, (C) 2009-2015 Boris Komraz</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>bkomraz1@gmail.com</authorEmail>
+	<authorUrl>http://joomla.rjews.net/bk-multithumb</authorUrl>
+	<version>3.7.2</version>
+	<description>MULTITHUMB_DESCR</description>
+	<updateservers>
+		<server type="extension"
+				priority="1"
+				name="Joomla.Rjews.Net">http://joomla.rjews.net/multithumb.xml</server>
+	</updateservers>	
+	<files>
+		<filename plugin="multithumb">multithumb.php</filename>
+		<filename>expando.js</filename>
+		<filename>index.html</filename>
+		<filename>magnify.cur</filename>
+		<filename>zoomin.png</filename>
+		<filename>multithumb.js</filename>
+		<folder>fields</folder>
+		<folder>greybox</folder>
+		<folder>iLoad</folder>
+		<folder>jquery</folder>
+		<folder>language</folder>
+		<folder>prettyPhoto</folder>
+		<folder>shadowbox</folder>
+		<folder>slimbox</folder>
+		<folder>highslide</folder>
+		<folder>thickbox</folder>
+		<folder>thumbnailviewer</folder>
+</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.plg_content_multithumb.ini</language>
+	</languages>
+	<config>
+	<fields name="params" >  
+		<fieldset name="basic">
+		<!--<field type="spacer" default="&lt;b&gt;Thumbnail parameters&lt;b&gt;" label="" description="Options for changing the style and behaviour of thumbnail." />-->
+		<field name="popup_type" type="list" default="modal" label="POPUP_METHOD"
+			description="POPUP_METHOD_DESCR">
+			<option value="none">NO_POPUP_JUST_THUMBNAILS</option>
+			<option value="modal">JOOMLA_MODAL</option>
+			<option value="normal">NORMAL_POPUP</option>
+			<option value="thumbnail">DYNAMIC_DRIVE</option>
+			<option value="lightbox">LIGHTBOX</option>
+			<option value="slimbox">SLIMBOX</option>
+			<!-- <option value="highslide">HIGHSLIDE</option> -->
+			<option value="shadowbox">SHADOWBOX</option>
+			<option value="prettyPhoto">PRETTY_PHOTO</option>
+			<option value="greybox">GREYBOX</option>
+			<option value="expansion">THUMBNAIL_EXPANSION</option>
+			<option value="expando">SMOOTHLY_EXPANSION</option>
+			<option value="iLoad">ILOAD</option>
+			<option value="widgetkit">WIDGETKIT</option>			
+			</field>
+
+		<field name="min_img_size" type="text" default="20x20" label="MINIMUM_IMAGE_SIZE" 
+			description="MINIMUM_IMAGE_SIZE_DESCR" />
+		<field name="thumb_proportions" type="list" default="bestfit" label="THUMB_PROPORTIONS"
+			description="THUMB_PROPORTIONS_DESCR">
+			<option value="bestfit">BEST_FIT</option>
+			<option value="crop">CROP_TO_FIT</option>
+			<option value="only_cut">CUT_TO_FIT</option>
+            <option value="fill">FILL_OUT_WITH_BACKGROUND_COLOR</option>
+            <option value="transparent">FILL_OUT_WITH_TRANSPARENT_COLOR</option>
+            <option value="stretch">STRECHT_TO_FIT</option>
+			</field>
+		<field name="thumb_bg" type="text" default="#FFFFFF" label="BACKGROUND_COLOR" 
+			description="BACKGROUND_COLOR_DESCR" />
+		<!-- <field name="only_not_resized" type="list" default="0" label="Only not resized"
+			description="Resize only not resized images">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field> -->
+		
+		
+		<field name="force_popup" type="list" default="0" label="POPUP_FOR_NON_RESIZED_IMAGES"
+			description="POPUP_FOR_NON_RESIZED_IMAGES_DESCR">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+	</fieldset>
+	<fieldset name="ARTICLE_THUMB">
+		<field name="enable_thumbs" type="list" default="1" label="THUMBNAILS_FOR_ARTICLES"
+			description="THUMBNAILS_FOR_ARTICLES_DESCR">
+			<option value="1">ENABLE_FOR_ALL_CATEGORIES</option>
+			<option value="2">ENABLE_FOR_FOLLOWING_CATEGORIES_ONLY</option>
+			<option value="3">ENABLE_FOR_ALL_CATEGORIES_EXCEPT_FOLLOWING</option>
+			<option value="4">ENABLE_FOR_FOLLOWING_CLASSES_ONLY</option>
+			<option value="0">DISABLE</option>
+		</field>
+		<field name="only_cats" multiple="multiple"  type="category" extension="com_content" size="5" default=""
+			label="CATEGORIES_OF_ARTICLES"
+			description="CATEGORIES_OF_ARTICLES_DESCR" /> 
+		<field name="only_classes" type="text" default="" label="IMAGE_CLASSES" 
+			description="IMAGE_CLASSES_DESCR" />
+			
+		<!-- <field name="modules_thumbs" type="list" default="1" label="MODULE_THUMBS"
+			description="MODULE_THUMBS_DESCR">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field> -->
+		<field type="spacer" name="myspacer" hr="true" />
+		<field name="use_image_size" type="list" default="0" label="USE_ARTICLE_IMAGE_SIZE"
+			description="USE_ARTICLE_IMAGE_SIZE_DESCR">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field name="thumb_size" type="text" default="150x100" label="THUMBS_SIZE"
+			description="THUMBS_SIZE_DESCR">
+		</field>
+		<field name="thumb_size_first" type="text" default="" label="LEADING_THUMB_SIZE"
+			description="LEADING_THUMB_SIZE_DESCR">
+		</field>
+		<field name="leading_num" type="text" default="1" label="LEADING_IMAGES_NUMBER"
+			description="LEADING_IMAGES_NUMBER_DESCR">
+		</field>
+		<field name="thumbclass" type="text" default="multithumb" label="THUMBNAILS_CLASS" 
+			description="THUMBNAILS_CLASS_DESCR" />
+		<field name="css" type="textarea" cols="30" rows="3" default="
+.multithumb {&lt;br /&gt; 
+   margin: 5px; &lt;br /&gt;
+   float: left; &lt;br /&gt;
+}" label="THUMBNAIL_CSS"
+	  description="THUMBNAIL_CSS_DESCR" />
+	</fieldset>  
+	<fieldset name="BLOG_THUMB_PARAMETERS" addfieldpath="/plugins/content/multithumb/fields" >
+		<field name="enable_blogs" type="list" default="1" label="THUMBNAILS_FOR_BLOGS"
+			description="THUMBNAILS_FOR_BLOGS_DESCR">
+			<option value="1">ENABLE_FOR_ALL_BLOGS</option>
+			<option value="2">ENABLE_FOR_FOLLOWING_BLOGS_ONLY</option> 
+			<option value="4">ENABLE_FOR_FOLLOWING_CLASSES_ONLY</option>
+			<option value="0">DISABLE</option>
+		</field>
+		<field name="blog_ids" multiple="multiple"  type="blogs" default="" label="THUMBNAILS_FOR_BLOGS" 
+			description="THUMBNAILS_FOR_BLOGS_DESCR" />			
+		<field name="only_classes_blog" type="text" default="" label="IMAGE_CLASSES" 
+			description="IMAGE_CLASSES_DESCR" />
+
+		<!-- <field name="modules_thumbs_blogs" type="list" default="1" label="MODULE_THUMBS_BLOG"
+			description="MODULE_THUMBS_BLOG_DESCR">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field> -->
+		
+		<field type="spacer" name="myspacer" hr="true" />
+
+		<field name="blog_mode" type="list" default="link" label="BLOG_MODE" 
+			description="BLOG_MODE_DESCR" >
+			<option value="link">LINK_TO_ARTICLE</option>
+			<option value="popup">POPUP</option>
+			<option value="thumb">THUMBNAILS_ONLY</option>
+			<!-- <option value="disable">Disable</option> -->
+		</field>
+		<field name="blog_img_txt" type="list" default="0" label="IMAGE_TOOLTIP" 
+			description="IMAGE_TOOLTIP_DESCR">
+			<option value="0">ARTICLE_READMORE</option>
+			<option value="1">IMG_ALT</option>
+			<option value="2">IMG_TITLE</option>
+		</field>
+		<field name="use_image_size_blog" type="list" default="0" label="USE_ARTICLE_IMAGE_SIZE"
+			description="USE_ARTICLE_IMAGE_SIZE_DESCR">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field name="blog_size" type="text" default="200x150" label="BLOGS_THUMBS_SIZE"
+			description="BLOGS_THUMBS_SIZE_DESCR">
+		</field>			
+		<field name="blog_size_leading" type="text" default="" label="LEADING_ARTICLE_THUMB_SIZE"
+			description="LEADING_ARTICLE_THUMB_SIZE_DESCR">
+		</field>
+		<field name="blog_leading_num" type="text" default="1" label="LEADING_ARTICLE_NUMBER"
+			description="LEADING_ARTICLE_NUMBER_DESCR">
+		</field>
+		<field name="thumbclass_blog" type="text" default="multithumb_blog" label="THUMBNAILS_CLASS" 
+			description="THUMBNAILS_CLASS_DESCR" />
+		<field name="css_blog" type="textarea" cols="30" rows="3" default=".multithumb_blog {    margin: 5px;    float: left; }" 
+		label="THUMBNAIL_CSS"
+	  description="THUMBNAIL_CSS_DESCR" />
+	</fieldset>
+	<fieldset name="BORDER_PARAMETERS">
+		<field name="border_style" type="list" default="none" label="BORDER_STYLE" 
+			description="BORDER_STYLE_DESCR">
+			<option value="none">PRESERVE</option>
+			<option value="remove">REMOVE</option>
+			<option value="solid">SOLID</option>
+			<option value="dotted">DOTTED</option>
+			<option value="dashed">DASHED</option>
+			<option value="groove">GROOVE</option>
+			<option value="ridge">RIDGE</option>
+			<option value="inset">INSET</option>
+			<option value="outset">OUTSET</option>
+			<option value="double">DOUBLE</option>
+		</field>
+		<field name="border_size" type="text" default="2px" label="BORDER_SIZE" 
+			description="BORDER_SIZE_DESCR" >
+			<!-- <option value="0">0px</option> 
+			<option value="1px">1px</option>
+			<option value="2px">2px</option>
+			<option value="3px">3px</option>
+			<option value="4px">4px</option>
+			<option value="5px">5px</option>-->
+		</field>
+		<field name="border_color" type="text" default="#000000" label="BORDER_COLOR" 
+			description="BORDER_COLOR_DESCR"/>
+	</fieldset>
+	<fieldset name="CAPTION_PARAMETERS">
+		<field name="caption" type="list" default="0" label="CAPTION"
+			description="">
+			<option value="0">DISABLE</option>
+			<option value="1">FOR_ARTICLES_ONLY</option>
+			<option value="2">FOR_ARTICLES_AND_BLOGS</option>
+			<option value="3">FOR_BLOGS_ONLY</option>
+		</field>
+	<!-- 	<field name="caption_pos" type="list" default="bottom" label="POSITION"
+			description="POSITION_DESCR">
+			<option value="disabled">Disabled</option> 
+			<option value="bottom">BOTTOM</option>
+			<option value="top">TOP</option>
+			<option value="right">RIGTH</option>
+			<option value="left">LEFT</option>
+			<option value="userdefined">User defined</option>
+			</field> -->
+		<field name="caption_type" type="list" default="title" label="CAPTION_FROM"
+			description="CAPTION_FROM_DESCR">
+			<option value="alt">ALT_TEXT</option>
+			<option value="title">TITLE</option>
+			<option value="iptc_caption">IPTC_CAPTION</option>
+			<option value="alt_or_title">ALT_TEXT_OR_TITLE</option>
+			<option value="title_or_alt">TITLE_OR_ALT_TEXT</option>
+			<option value="iptc_caption_or_alt_or_title">IPTC_CAPTION_OR_ALT_TEXT_OR_TITLE</option>
+			<option value="iptc_caption_or_title_or_alt">IPTC_CAPTION_OR_TITLE_OR_ALT_TEXT</option>
+			<option value="alt_or_title_or_iptc_caption">ALT_TEXT_OR_TITLE_OR_IPTC_CAPTION</option>
+			<option value="title_or_alt_or_iptc_caption">TITLE_OR_ALT_TEXT_IPTC_CAPTION</option>
+		</field>
+		<field name="caption_class" type="text" default="mtCapStyle" label="CAPTION_CLASS" 
+			description="CAPTION_CLASS_DES" />
+		<field name="caption_css" type="textarea" cols="30" rows="7" default="
+.mtCapStyle figcaption {&lt;br /&gt; 
+   caption-side: bottom;&lt;br /&gt;
+   font-weight: bold;&lt;br /&gt;
+   color: black;  &lt;br /&gt;
+   background-color: #ddd;&lt;br /&gt;
+   text-align:center;&lt;br /&gt;
+}" label="CAPTION_CSS_STYLING"
+	  description="CAPTION_CSS_STYLING_DESCR" />
+		
+	</fieldset>
+	<fieldset name="GROUPING_PARAMETERS">
+		<field name="group_images" type="list" default="0" label="GROUP_IMAGES"
+			description="GROUP_IMAGES_DESCR">
+			<option value="0">JNO</option>
+			<option value="1">OF_ARTICLE</option>
+			<option value="2">ON_PAGE</option>
+			<option value="3">BY_ALT</option>
+		</field>	  
+	  	
+	  	<field name="max_thumbnails" type="text" default="0" label="GROUP_PREVIEW"
+			description="GROUP_PREVIEW_DESCR" />
+
+		<field name="group_images_gal" type="list" default="1" label="GALLERY_GROUPING"
+			description="GALLERY_GROUPING_DESCR">
+			<option value="0">AS_ABOVE</option>
+			<option value="1">SEPARATELY</option>
+		</field>	  
+		
+	  	<field name="max_thumbnails_gal" type="text" default="0" label="GALLERY_PREVIEW"
+			description="GROUP_PREVIEW_DESCR" />
+
+		  <field name="more_images" type="list" default="1" label="MORE_IMAGES"
+			description="MORE_IMAGES_DESCR">
+			<option value="1">SHOW</option>
+			<option value="0">HIDE</option>
+	</field>
+		  <field name="more_images_text" type="text" default="" label="MORE_IMAGES_TEXT"
+			description="MORE_IMAGES_TEXT_DESCR" />
+	</fieldset>
+	<fieldset name="GALLERY_PARAMETERS">
+		<field name="gallery_thumb_size" type="text" default="" label="GALLERY_THUMB_SIZE" 
+			description="GALLERY_THUMB_SIZE_DESCR" />
+		<field name="num_cols" type="text" default="3" label="COLUMNS_NUM" 
+			description="COLUMNS_NUM_DESCR" />
+		<field name="gallery_class" type="text" default="mtGallery" label="GIVE_GALLERY_THIS_CLASS" 
+			description="GIVE_GALLERY_THIS_CLASS_DESCR" />
+		<field name="gallery_css" type="textarea" cols="30" rows="4" default="
+.mtGallery {&lt;br /&gt; 
+   margin: 5px; &lt;br /&gt;
+   align: center; &lt;br /&gt;
+   float: none; &lt;br /&gt;
+}" label="GALLERY_CSS"
+	  description="GALLERY_CSS_DESCR" />
+    <field type="spacer" label="CAPTION_FROM"        description="CAPTION_FROM_DESCR"        />
+    <field type="spacer" label="ORDER_OF_PREFERENCE" description="ORDER_OF_PREFERENCE_DESCR" /> 
+		<field name="caption_type_gallery_iptc"     type="text" size="1" default="0" label="IMAGE_IPTC_CAPTION"	description="IMAGE_IPTC_CAPTION_DESCR" />
+		<field name="caption_type_gallery_filename" type="text" size="1" default="0" label="IMAGE_FILENAME"	    description="IMAGE_FILENAME_DESCR" />
+		<field name="caption_type_gallery_title"    type="text" size="1" default="2" label="IMAGE_TITLE"	description="IMAGE_TITLE_DESCR" />
+		<field name="caption_type_gallery_alt"      type="text" size="1" default="3" label="MAIN_IMAGE_ALT"	    description="MAIN_IMAGE_ALT_DESCR" />
+	</fieldset>
+	<fieldset name="FULL_SIZE_IMAGE_PARAMETERS">
+		<field name="resize" type="list" default="0" label="RESIZE_IMAGES"
+			description="RESIZE_IMAGES_DESCR">
+			<option value="0">Disable</option>
+			<option value="1">Enable</option>
+			</field>
+		<field name="full_width" type="text" default="800" label="WIDTH" 
+				description="WIDTH_DESCR" />
+		<field name="full_height" type="text" default="600" label="HEIGHT" 
+				description="HEIGHT_DESCR" />
+		<field name="image_proportions" type="list" default="bestfit" label="IMAGE_PROPORTIONS"
+			description="IMAGE_PROPORTIONS_DESCR">
+			<option value="bestfit">BEST_FIT</option>
+			<option value="crop">CROP_TO_FIT</option>
+			<!-- <option value="cut">Cut to fit (cut both sides)</option> -->
+            <option value="fill">FILL_OUT_WITH_BACKGROUND_COLOR</option>
+            <option value="transparent">FILL_OUT_WITH_TRANSPARENT_COLOR</option>
+            <option value="stretch">STRECHT_TO_FIT</option>
+			</field>
+		<field name="image_bg" type="text" default="#000000" label="BACKGROUND_COLOR" 
+				description="BACKGROUND_COLOR_DESCR" />
+	</fieldset>
+	<fieldset name="MAGNIFYING">
+		<field name="magnify_type" type="list" default="1" label="MAGNIFYING_SYMBOLS"
+			description="MAGNIFYING_SYMBOLS_DESCR">
+			<option value="0">MAGNIFYING_NOTHING</option>
+			<option value="1">MAGNIFYING_MAGNIFY_CURSOR</option>
+			<option value="2">MAGNIFYING_ZOOMIN_LABEL</option>
+			<option value="3">MAGNIFYING_MAGNIFY_CURSOR_AND_ZOOMIN_LABEL</option>
+		</field>
+		<field name="zoomin_file" type="text" default="plugins/content/multithumb/zoomin.png" label="MAGNIFYING_ZOOM_LABEL_FILE" 
+			description="MAGNIFYING_ZOOM_LABEL_FILE_DESCR" />
+		<field name="zoomin_position" type="list" default="0" label="MAGNIFYING_ZOOM_LABEL_POSITION"
+			description="">
+			<option value="0">MAGNIFYING_CENTER</option>
+			<option value="1">MAGNIFYING_LEFT_TOP</option>
+			<option value="2">MAGNIFYING_RIGHT_TOP</option>
+			<option value="3">MAGNIFYING_RIGHT_BOTTOM</option>
+			<option value="4">MAGNIFYING_LEFT_BOTTOM</option>
+		</field>			
+	</fieldset>
+	<fieldset name="WATERMARK">
+		<field name="watermark" type="list" default="0" label="WATERMARK"
+			description="">
+			<option value="0">WATERMARK_NOTHING</option>
+			<option value="1">WATERMARK_FULL_SIZE_IMAGES_ONLY</option>
+			<option value="2">WATERMARK_FULL_SIZE_IMAGES_AND_THUMBNAIL</option>
+		</field>
+		<field name="watermark_type" type="list" default="0" label="WATERMARK_ENABLE_FOR"
+			description="WATERMARK_ENABLE_FOR_DESCR">
+			<!-- <option value="0">Disable</option> -->
+			<option value="1">WATERMARK_ALL_CATEGORIES</option>
+			<option value="2">WATERMARK_FOLLOWING_CATEGORIES_ONLY</option>
+			<option value="3">WATERMARK_ALL_CATEGORIES_EXCEPT_FOLLOWING</option>
+		</field>
+		<field name="watermark_cats" multiple="multiple"  type="category" extension="com_content" default="" label="WATERMARK_CATEGORIES_OF_ARTICLES" 
+			description="WATERMARK_CATEGORIES_OF_ARTICLES_DESCR" />
+		<field name="watermark_file" type="media" directory="/" default="" label="WATERMARK_FILE" 
+			description="WATERMARK_FILE_DESCR" />
+		<field name="watermark_horiz_type" type="list" default="" label="WATERMARK_HORIZ_POSITION" 
+			description="" >
+			<option value="center">WATERMARK_CENTER</option>
+			<option value="left">WATERMARK_SHIFT_FROM_LEFT</option>
+			<option value="right">WATERMARK_SHIFT_FROM_RIGHT</option>
+		</field>
+		<field name="watermark_left" type="text" default="" label="WATERMARK_HORIZ_SHIFT" 
+			description="WATERMARK_HORIZ_SHIFT_DESCR" />
+		<field name="watermark_vert_type" type="list" default="" label="WATERMARK_VERT_POSITION" 
+			description="" >
+			<option value="middle">WATERMARK_MIDDLE</option>
+			<option value="top">WATERMARK_SHIFT_FROM_TOP</option>
+			<option value="bottom">WATERMARK_SHIFT_FROM_BOTTOM</option>
+		</field>
+		<field name="watermark_top" type="text" default="" label="WATERMARK_VERTICAL_INDENT" 
+			description="WATERMARK_VERTICAL_INDENT_DESR" />
+		<field name="transparency_type" type="list" default="alpha" label="WATERMARK_TRANSPARENCY"
+			description="WATERMARK_TRANSPARENCY_DESCR">
+			<option value="alpha">WATERMARK_TRUE_ALPHA_BLENDING</option>
+			<option value="color">WATERMARK_TRANSPARENT_BACKGROUND_COLOR</option>
+			</field>
+		<field name="transparent_color" type="text" default="#000000" label="WATERMARK_TRANSPARENT_COLOR" 
+			description="WATERMARK_TRANSPARENT_COLOR_DESCR" />
+		<field name="transparency" type="text" default="25" label="WATERMARK_TRANSPARENCY_IN_PERCENT" 
+			description="WATERMARK_TRANSPARENCY_IN_PERCENT_DESCR" />
+		<field name="scramble" type="list" default="off" label="WATERMARK_SCRAMBLE_IMAGE_NAMES"
+			description="WATERMARK_SCRAMBLE_IMAGE_NAMES_DESCR">
+			<option value="off">JNO</option>
+			<option value="md5">WATERMARK_MD5</option>
+			<option value="crc32">WATERMARK_CRC32</option>
+			</field>
+	</fieldset>
+	
+<!-- 	<fieldset name="HIGHSLIDE_PARAMETERS">
+		<field name="highslide_headers" type="list" default="1" label="HIGHSLIDE_SCRIPTS" description="">
+			<option value="1">LOAD_AUTOMATICALLY</option>
+			<option value="2">LOAD_ALWAYS</option>
+			<option value="0">DONT_LOAD</option>
+		</field>
+	</fieldset> -->
+	
+	<fieldset name="SLIMBOX_PARAMETERS">
+		<field name="slimbox_headers" type="list" default="1" label="SLIMBOX_SCRIPTS" description="">
+			<option value="1">LOAD_AUTOMATICALLY</option>
+			<option value="2">LOAD_ALWAYS</option>
+			<option value="0">DONT_LOAD</option>
+		</field>
+		<field name="slimbox_loop" type="list" default="0" label="LOOP" description="LOOP_DESCR">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="slimbox_overlayOpacity" type="text" default="0.8" label="OVERLAY_OPACITY" description="OVERLAY_OPACITY_DESCR"/>
+		<field name="slimbox_overlayFadeDuration" type="text" default="400" label="OVERLAY_FADE_DURATION" description="OVERLAY_FADE_DURATION_DESCR"/>
+		<field name="slimbox_resizeDuration" type="text" default="400" label="RESIZE_DURATION" description="RESIZE_DURATION_DESCR"/>
+		<field name="slimbox_initialWidth" type="text" default="250" label="INITIAL_WIDTH" description="INITIAL_WIDTH_DESCR"/>
+		<field name="slimbox_initialHeight" type="text" default="250" label="INITIAL_HEIGHT" description="INITIAL_HEIGHT_DESCR"/>
+		<field name="slimbox_imageFadeDuration" type="text" default="400" label="FADE_DURATION" description="FADE_DURATION_DESCR"/>
+		<field name="slimbox_captionAnimationDuration" type="text" default="400" label="ANIMATION_DURATION" description="ANIMATION_DURATION_DESCR"/>
+		<field name="slimbox_counterText" type="text" default="Image {x} of {y}" label="COUNTERTEXT" description="COUNTERTEXT_DESCR"/>
+		<field name="slimbox_closeKeys" type="text" default="[27, 88, 67]" label="CLOSE_KEYS" description="CLOSE_KEYS_DESCR"/>
+		<field name="slimbox_previousKeys" type="text" default="[37, 80]" label="PREVIOUS_KEYS" description="PREVIOUS_KEYS_DESCR"/>
+		<field name="slimbox_nextKeys" type="text" default="[39, 78]" label="NEXT_KEYS" description="NEXT_KEYS_DESCR"/>
+	</fieldset>
+	<fieldset name="PRETTYPHOTO">
+		<field name="prettyphoto_headers" type="list" default="1" label="PRETTYPHOTO_SCRIPTS"
+			description="">
+			<option value="1">LOAD_AUTOMATICALLY</option>
+			<option value="2">LOAD_ALWAYS</option>
+			<option value="0">DONT_LOAD</option>
+		</field>
+		<field name="prettyphoto_animationSpeed" type="list" default="normal" label="PRETTYPHOTO_ANIMATIONSPEED"	description="PRETTYPHOTO_ANIMATIONSPEED_DESCR">
+			<option value="fast">PRETTYPHOTO_FAST</option>
+			<option value="slow">PRETTYPHOTO_SLOW</option>
+			<option value="normal">PRETTYPHOTO_NORMAL</option>
+		</field>
+		<field name="prettyphoto_opacity" type="text" default="0.80" label="PRETTYPHOTO_OPACITY"	description="PRETTYPHOTO_OPACITY_DESCR" />
+		<field name="prettyphoto_showTitle" type="list" default="true" label="PRETTYPHOTO_TITLE" description="">
+			<option value="true">SHOW</option>
+			<option value="false">HIDE</option>
+		</field>
+		<field name="prettyphoto_allowresize" type="list" default="true" label="PRETTYPHOTO_RESIZE"	description="PRETTYPHOTO_RESIZE_DESCR">
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>
+		<field name="prettyphoto_counter_separator_label" type="text" default="/" label="PRETTYPHOTO_SEPARATOR" description="PRETTYPHOTO_SEPARATOR_DESCR"/>
+		<field name="prettyphoto_theme" type="list" default="'light_rounded" label="PRETTYPHOTO_THEME"
+			description="PRETTYPHOTO_THEME_DESCR">
+			<option value="light_rounded">PRETTYPHOTO_LIGHT_ROUNDED</option>
+			<option value="dark_rounded">PRETTYPHOTO_DARK_ROUNDED</option>
+			<option value="light_square">PRETTYPHOTO_LIGHT_SQUARE</option>
+			<option value="dark_square">PRETTYPHOTO_DARK_SQUARE</option>
+			<option value="facebook">PRETTYPHOTO_FACEBOOK</option>
+		</field>
+		
+		<!-- TBD  -->
+		<field name="prettyphoto_horizontal_padding" type="text" default="20" label="PRETTYPHOTO_HORIZONTAL_PADDING"
+			description="PRETTYPHOTO_HORIZONTAL_PADDING_DESCR"/>
+		<field name="prettyphoto_modal" type="list" default="false" label="PRETTYPHOTO_MODAL_MODE"
+			description="PRETTYPHOTO_MODAL_MODE_DESCR">
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>
+
+		<field name="prettyphoto_slideshow" type="text" default="false" label="PRETTYPHOTO_SLIDESHOW"
+			description="PRETTYPHOTO_SLIDESHOW_DESCR" />
+		<field name="prettyphoto_autoplay_slideshow" type="list" default="false" label="PRETTYPHOTO_AUTOPLAY_SLIDESHOW"
+			description="">
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>
+		<field name="prettyphoto_overlay_gallery" type="list" default="false" label="PRETTYPHOTO_OVERLAY_GALLERY"
+			description="PRETTYPHOTO_OVERLAY_GALLERY_DESCR">
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>
+	</fieldset>
+	<fieldset name="Shadowbox">
+		<field name="shadowbox_headers" type="list" default="1" label="SHADOWBOX_SCRIPTS"
+			description="">
+			<option value="1">LOAD_AUTOMATICALLY</option>
+			<option value="2">LOAD_ALWAYS</option>
+			<option value="0">DONT_LOAD</option>
+		</field>
+		<field name="shadowbox_animate" type="list" default="1" label="SHADOWBOX_ANIMATE"	description="SHADOWBOX_ANIMATE_DESCR">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="shadowbox_animateFade" type="list" default="1" label="SHADOWBOX_ANIMATEFADE"	description="SHADOWBOX_ANIMATEFADE_DESCR">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="shadowbox_animSequence" type="list" default="sync" label="SHADOWBOX_ANIMSEQUENCE"	description="SHADOWBOX_ANIMSEQUENCE_DESCR">
+			<option value="wh">SHADOWBOX_WIDTH_FIRST_THEN_HEIGHT</option>
+			<option value="hw">SHADOWBOX_HEIGHT_FIRST_THEN_WIDTH</option>
+			<option value="sync">SHADOWBOX_BOTH_SIMULTANEOUSLY</option>
+		</field>		
+		<field name="shadowbox_autoplayMovies" type="list" default="1" label="SHADOWBOX_AUTOPLAYMOVIES"	description="SHADOWBOX_AUTOPLAYMOVIES_DESCR">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>		
+		<field name="shadowbox_continuous" type="list" default="0" label="SHADOWBOX_CONTINUOUS"	description="SHADOWBOX_CONTINUOUS_DESCR">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>		
+		<field name="shadowbox_counterLimit" type="text" default="10" label="SHADOWBOX_COUNTERLIMIT"	description="SHADOWBOX_COUNTERLIMIT_DESCR" />
+		
+		<field name="shadowbox_counterType" type="list" default="default" label="SHADOWBOX_COUNTER_TYPE"	description="SHADOWBOX_COUNTER_TYPE_DESCR">
+			<option value="default">Default</option>
+			<option value="skip">Skip</option>
+		</field>		
+		<field name="shadowbox_displayCounter" type="list" default="1" label="SHADOWBOX_DISPLAYCOUNTER"	description="SHADOWBOX_DISPLAYCOUNTER_DESCR">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>		
+		<field name="shadowbox_displayNav" type="list" default="1" label="SHADOWBOX_DISPLAY_NAV"	description="SHADOWBOX_DISPLAY_NAV_DESCR">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>		
+		<field name="shadowbox_enableKeys" type="list" default="1" label="SHADOWBOX_ENABLE_KEYS"	description="SHADOWBOX_ENABLE_KEYS_DESCR">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>		
+		<field name="shadowbox_fadeDuration" type="text" default="0.35" label="SHADOWBOX_FADEDURATION"	description="SHADOWBOX_FADEDURATION_DESCR" />
+		<field name="shadowbox_flashParams" type="text" default="bgcolor:#000000" label="SHADOWBOX_FLASHPARAMS"	description="SHADOWBOX_FLASHPARAMS_DESCR" />
+		<field name="shadowbox_flashVars" type="text" default="" label="SHADOWBOX_FLASHVARS"	description="SHADOWBOX_FLASHVARS_DESCR" />
+		<field name="shadowbox_flashVersion" type="text" default="9.0.0" label="SHADOWBOX_FLASHVERSION"	description="SHADOWBOX_FLASHVERSION_DESCR" />
+		<field name="shadowbox_handleOversize" type="list" default="resize" label="SHADOWBOX_HANDLEOVERSIZE"	description="SHADOWBOX_HANDLEOVERSIZE_DESCR">
+			<option value="none">SHADOWBOX_NONE</option>
+			<option value="resize">SHADOWBOX_RESIZE</option>
+			<option value="drag">SHADOWBOX_DRAG</option>
+		</field>		
+		<field name="shadowbox_handleUnsupported" type="list" default="1" label="SHADOWBOX_HANDLEUNSUPPORTED"	description="SHADOWBOX_HANDLEUNSUPPORTED_DESCR">
+			<option value="link">SHADOWBOX_LINK</option>
+			<option value="remove">SHADOWBOX_REMOVE</option>
+		</field>		
+		<field name="shadowbox_initialHeight" type="text" default="160" label="SHADOWBOX_INITIALHEIGHT"	description="SHADOWBOX_INITIALHEIGHT_DESCR" />
+		<field name="shadowbox_initialWidth" type="text" default="320" label="SHADOWBOX_INITIALWIDTH"	description="SHADOWBOX_INITIALWIDTH_DESCR" />
+
+		<field name="shadowbox_modal" type="list" default="0" label="SHADOWBOX_MODAL"	description="SHADOWBOX_MODAL_DESCR">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>		
+		<field name="shadowbox_overlayColor" type="text" default="#000" label="SHADOWBOX_OVERLAYCOLOR"	description="SHADOWBOX_OVERLAYCOLOR_DESCR" />
+		<field name="shadowbox_overlayOpacity" type="text" default="0.5" label="SHADOWBOX_OVERLAYOPACITY"	description="SHADOWBOX_OVERLAYOPACITY_DESCR" />
+		<field name="shadowbox_resizeDuration" type="text" default="0.35" label="SHADOWBOX_RESIZEDURATION"	description="SHADOWBOX_RESIZEDURATION_DESCR" />
+		<field name="shadowbox_showOverlay" type="list" default="1" label="SHADOWBOX_SHOWOVERLAY"	description="SHADOWBOX_SHOWOVERLAY_DESCR">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>		
+		<field name="shadowbox_showMovieControls" type="list" default="1" label="SHADOWBOX_SHOWMOVIECONTROLS"	description="SHADOWBOX_SHOWMOVIECONTROLS_DESCR">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+<!--		<field name="shadowbox_skipSetup" type="list" default="1" label="skipSetup"	description="Set this true to skip automatically calling Shadowbox.setup when Shadowbox initializes.">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field> -->
+		<field name="shadowbox_slideshowDelay" type="text" default="0" label="SHADOWBOX_SLIDESHOWDELAY"	description="SHADOWBOX_SLIDESHOWDELAY_DESCR" />
+<!--		<field name="shadowbox_troubleElements" type="text" default="&quot;select&quot;, &quot;object&quot;, &quot;embed&quot;, &quot;canvas&quot;" label="troubleElements"	description="An array of tag names of elements that should be hidden when a modal overlay is used. This option exists because some browsers are not able to display a semi-transparent overlay on top of these elements. These elements will have their visibility restored when Shadowbox closes. " /> -->
+		<field name="shadowbox_viewportPadding" type="text" default="20" label="SHADOWBOX_VIEWPORTPADDING"	description="SHADOWBOX_VIEWPORTPADDING_DESCR" />
+	</fieldset>
+	<fieldset name="iLoad">
+		<field name="iload_headers" type="list" default="1" label="ILOAD_HEADERS"
+			description="">
+			<option value="1">LOAD_AUTOMATICALLY</option>
+			<option value="2">LOAD_ALWAYS</option>
+			<option value="0">DONT_LOAD</option>
+		</field>
+		<field name="iload_fontCss" type="text" default="font:11px Tahoma,Arial,Helvetica,sans-serif;color:#aaa;" label="ILOAD_FONTCSS"	description="ILOAD_FONTCSS_DESCR" />
+		<field name="iload_imageDescCss" type="text" default="display: block;" label="ILOAD_IMAGEDESCCSS"	description="ILOAD_IMAGEDESCCSS_DESCR" />
+		<field name="iload_imageNameCss" type="text" default="display: block; font-weight: 700; color: # 999;" label="ILOAD_IMAGENAMECSS"	description="ILOAD_IMAGENAMECSS_DESCR" />
+		<field name="iload_imageSetCss" type="text" default="display: block;" label="ILOAD_IMAGESETCSS"	description="ILOAD_IMAGESETCSS_DESCR" />
+		<field name="iload_imageInfoCss" type="text" default="display: block;" label="ILOAD_IMAGEINFOCSS"	description="ILOAD_IMAGEINFOCSS_DESCR" />
+		<field name="iload_zIndex" type="text" default="9999" label="ILOAD_ZINDEX"	description="ILOAD_ZINDEX_DESCR" />
+		<field name="iload_splitSign" type="text" default="|" label="ILOAD_SPLITSIGN"	description="ILOAD_SPLITSIGN_DESCR" />
+		<field name="iload_bigButtonsDisabledOpacity" type="text" default="30" label="ILOAD_BIGBUTTONSDISABLEDOPACITY"	description="ILOAD_BIGBUTTONSACTIVEOPACITY_DESCR" />
+		<field name="iload_bigButtonsPassiveOpacity" type="text" default="100" label="ILOAD_BIGBUTTONSPASSIVEOPACITY"	description="ILOAD_MINBUTTONSPASSIVEOPACITY_DESCR" />
+		<field name="iload_bigButtonsActiveOpacity" type="text" default="70" label="ILOAD_BIGBUTTONSACTIVEOPACITY"	description="ILOAD_MINBUTTONSACTIVEOPACITY_DESCR" />
+		<field name="iload_minButtonsPassiveOpacity" type="text" default="50" label="ILOAD_MINBUTTONSPASSIVEOPACITY"	description="ILOAD_OVERLAYDISAPPEARTIME_DESCR" />
+		<field name="iload_minButtonsActiveOpacity" type="text" default="100" label="ILOAD_MINBUTTONSACTIVEOPACITY"	description="ILOAD_CONTAINERAPPEARTIME_DESCR" />
+		<field name="iload_overlayAppearTime" type="text" default="200" label="ILOAD_OVERLAYAPPEARTIME"	description="ILOAD_OVERLAYAPPEARTIME_DESCR" />
+		<field name="iload_overlayDisappearTime" type="text" default="200" label="ILOAD_OVERLAYDISAPPEARTIME"	description="ILOAD_OVERLAYDISAPPEARTIME_DESCR" />
+		<field name="iload_containerAppearTime" type="text" default="300" label="ILOAD_CONTAINERAPPEARTIME"	description="ILOAD_CONTAINERAPPEARTIME_DESCR" />
+		<field name="iload_containerDisappearTime" type="text" default="300" label="ILOAD_containerDisappearTime"	description="ILOAD_Time of disappearance viewport" />
+		<field name="iload_containerResizeTime" type="text" default="300" label="ILOAD_CONTAINERRESIZETIME"	description="ILOAD_CONTAINERRESIZETIME_DESCR" />
+		<field name="iload_contentAppearTime" type="text" default="350" label="ILOAD_CONTENTAPPEARTIME"	description="ILOAD_CONTENTAPPEARTIME_DESCR" />
+		<field name="iload_contentDisappearTime" type="text" default="200" label="ILOAD_CONTENTDISAPPEARTIME"	description="ILOAD_CONTENTDISAPPEARTIME_DESCR" />
+		<field name="iload_loaderAppearTime" type="text" default="200" label="ILOAD_LOADERAPPEARTIME"	description="ILOAD_LOADERAPPEARTIME_DESCR" />
+		<field name="iload_loaderDisappearTime" type="text" default="200" label="ILOAD_LOADERDISAPPEARTIME"	description="ILOAD_LOADERDISAPPEARTIME_DESCR" />
+		<field name="iload_containerCenterTime" type="text" default="300" label="ILOAD_CONTAINERCENTERTIME"	description="ILOAD_CONTAINERCENTERTIME_DESCR" />
+		<field name="iload_panelAppearTime" type="text" default="300" label="ILOAD_PANELAPPEARTIME"	description="ILOAD_PANELAPPEARTIME_DESCR" />
+		<field name="iload_panelDisappearTime" type="text" default="300" label="ILOAD_PANELDISAPPEARTIME"	description="ILOAD_PANELDISAPPEARTIME_DESCR" />
+		<field name="iload_arrowsTime" type="text" default="230" label="ILOAD_ARROWSTIME"	description="ILOAD_ARROWSTIME_DESCR" />
+		<field name="iload_paddingFromScreenEdge" type="text" default="35" label="ILOAD_PADDINGFROMSCREENEDGE"	description="ILOAD_PADDINGFROMSCREENEDGE_DESCR" />
+		<field name="iload_contentPadding" type="text" default="0" label="ILOAD_CONTENTPADDING"	description="ILOAD_CONTENTPADDING_DESCR" />
+		<field name="iload_cornersSize" type="text" default="18" label="ILOAD_CORNERSSIZE"	description="ILOAD_CORNERSSIZE_DESCR" />
+		<field name="iload_overlayOpacity" type="text" default="95" label="ILOAD_OVERLAYOPACITY"	description="ILOAD_OVERLAYOPACITY_DESCR" />
+		<field name="iload_overlayBackground" type="text" default="#000000" label="ILOAD_OVERLAYBACKGROUND"	description="ILOAD_OVERLAYBACKGROUND_DESCR" />
+		<field name="iload_containerColor" type="text" default="#ffffff" label="ILOAD_CONTAINERCOLOR"	description="ILOAD_CONTAINERCOLOR_DESCR" />
+		<field name="iload_panelType" type="list" default="1" label="ILOAD_PANELTYPE"	description="ILOAD_PANELTYPE_DESCR" >
+			<option value="0">ILOAD_PANELTYPE_BAR_DOES_NOT_APPEAR_AT_ALL</option>
+			<option value="1">ILOAD_PANELTYPE_SMALL_PANEL</option>
+			<option value="2">ILOAD_PANELTYPE_LARGE_PANEL</option>
+		</field>		
+		<field name="iload_hidePanelWhenScale" type="list" default="true" label="ILOAD_HIDEPANELWHENSCALE"	description="ILOAD_HIDEPANELWHENSCALE_DESCR" >
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>
+		<field name="iload_closeOnClickWhenSingle" type="list" default="true" label="ILOAD_CLOSEONCLICKWHENSINGLE"	description="ILOAD_CLOSEONCLICKWHENSINGLE_DESCR" >
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>		
+		<field name="iload_forceCloseButton" type="list" default="true" label="ILOAD_FORCECLOSEBUTTON"	description="ILOAD_FORCECLOSEBUTTON_DESCR" >
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>
+		<field name="iload_arrows" type="list" default="true" label="ILOAD_ARROWS"	description="ILOAD_ARROWS_DESCR" >
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>		
+		<field name="iload_imageNav" type="list" default="true" label="ILOAD_IMAGENAV"	description="ILOAD_IMAGENAV_DESCR" >
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>		
+		<field name="iload_showSize" type="list" default="true" label="ILOAD_SHOWSIZE"	description="ILOAD_SHOWSIZE_DESCR" >
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>
+		<field name="iload_forceFullSize" type="list" default="false" label="ILOAD_FORCEFULLSIZE"	description="ILOAD_FORCEFULLSIZE_DESCR" >
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>		
+		<field name="iload_keyboard" type="list" default="true" label="ILOAD_KEYBOARD"	description="ILOAD_KEYBOARD_DESCR" >
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>		
+		<field name="iload_dragAndDrop" type="list" default="true" label="ILOAD_DRAGANDDROP"	description="ILOAD_DRAGANDDROP_DESCR" >
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>		
+		<field name="iload_preloadNeighbours" type="list" default="true" label="ILOAD_PRELOADNEIGHBOURS"	description="ILOAD_PRELOADNEIGHBOURS_DESCR" >
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>
+		
+		<field name="iload_info" type="list" default="true" label="ILOAD_INFO"	description="ILOAD_INFO_DESCR" >
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>		
+		<field name="iload_showName" type="list" default="true" label="ILOAD_SHOWNAME"	description="ILOAD_SHOWNAME_DESCR" >
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>		
+		<field name="iload_showDesc" type="list" default="true" label="ILOAD_SHOWDESC"	description="ILOAD_SHOWDESC_DESCR" >
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>		
+		<field name="iload_showSet" type="list" default="true" label="ILOAD_SHOWSET"	description="ILOAD_SHOWSET_DESCR" >
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>		
+		<field name="iload_imageSetText" type="text" size="30" default="['&lt;b&gt; [N] &lt;/b&gt; from &lt;b&gt; [T] &lt;/b&gt;', 'in the group [S]']" label="ILOAD_IMAGESETTEXT"	description="ILOAD_IMAGESETTEXT_DESCR" />
+		<field name="iload_fileInfoText" type="text" size="30" default="File format &lt;b&gt; [F] &lt;/b&gt; size &lt;b&gt; [W] x [H] &lt;/b&gt; pixels" label="ILOAD_FILEINFOTEXT"	description="ILOAD_FILEINFOTEXT_DESCR" />
+		<field name="iload_tips" type="text" size="30" default="'Previous', 'Next', 'Close', 'Slideshow', 'Pause', 'Original', 'Fit to window'" label="ILOAD_tips"	description="ILOAD_TIPS_DESCR" />
+		<field name="iload_slideshowTime" type="text" default="3000" label="ILOAD_slideshowTime"	description="ILOAD_SLIDESHOWTIME_DESCR" />
+		<field name="iload_slideshowRound" type="list" default="true" label="ILOAD_slideshowRound"	description="ILOAD_SLIDESHOWROUND_DESCR" >
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>		
+		<field name="iload_slideshowClose" type="list" default="false" label="ILOAD_slideshowClose"	description="ILOAD_SLIDESHOWCLOSE_DESCR" >
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>	
+		<field name="iload_errorWidth" type="text" default="240" label="ILOAD_errorWidth"	description="ILOAD_ERRORWIDTH_DESCR" />
+		<field name="iload_errorName" type="text" default="Error." label="ILOAD_errorName"	description="ILOAD_Header error" />
+		<field name="iload_errorText" type="text" default="Could not load image. Perhaps the address specified is not valid or the server is temporarily unavailable." label="ILOAD_errorText"	description="ILOAD_ERRORNAME_DESCR" />
+		<field name="iload_errorNameCss" type="text" default="display: block; font-weight: 700; color: # 999; padding-bottom: 4px;" label="ILOAD_errorNameCss"	description="ILOAD_ERRORNAMECSS_DESCR" />
+		<field name="iload_errorDescCss" type="text" default="display: block; padding-bottom: 4px;" label="ILOAD_errorDescCss"	description="ILOAD_ERRORDESCCSS_DESCR" />
+	</fieldset>
+	<fieldset name="jQuery">
+		<field name="jquery_headers" type="list" default="1" label="JQUERY_HEADERS"
+			description="">
+			<option value="1">LOAD_AUTOMATICALLY</option>
+			<option value="2">LOAD_ALWAYS</option>
+			<option value="0">DONT_LOAD</option>
+		</field>
+		<field name="jquery_version" type="list" default="1.6.1" label="JQUERY_VERSION"
+			description="">
+			<option value="1.6.1">1.6.1</option>
+			<option value="1.4.4">1.4.4</option>
+			<option value="1.3.2">1.3.2</option>
+		</field>
+	</fieldset>
+	<fieldset name="IMAGE_TYPE">
+		<field name="img_type" type="list" default="" label="IMAGE_TYPE" description="IMAGE_TYPE_DESCR">
+			<option value="">PRESERVE</option>
+			<option value="png">IMAGE_TYPE_PNG</option>
+			<option value="gif">IMAGE_TYPE_GIF</option>
+			<option value="jpeg">IMAGE_TYPE_JPEG</option>
+		</field>
+		<field name="quality" type="text" default="80" label="JPG_QUALITY" 
+			description="JPG_QUALITY_DESCR" />
+		<field name="allow_img_toolbar" type="radio" default="0" label="ALLOW_IE_IMAGE_TOOLBAR"
+			description="ALLOW_IE_IMAGE_TOOLBAR_DESCR">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+	</fieldset>
+	<fieldset name="INTEGRATION">
+		<field name="by_context" type="list" default="1" label="BY_CONTEXT_RULE" 
+			description="BY_CONTEXT_RULE_DESCR" >
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field type="spacer" name="CONTEXT_RULES" class="text" label="CONTEXT_RULES"/>
+		<field name="article_context" type="textarea" cols="40" rows="3" default="com_content.article,mod_custom.content,mod_articles_category.content,com_tag.tag" label="ARTICLE_CONTEXT"
+				description="ARTICLE_CONTEXT_DESCR"/>
+		<field name="blog_context" type="textarea" cols="40" rows="3" default="com_content.featured,com_content.category,mod_dn.featured,com_tags.tag" label="BLOG_CONTEXT"
+				description="BLOG_CONTEXT_DESCR"/>
+		<field name="context_debug" type="list" default="0" label="CONTEXT_DEBUG" 
+			description="CONTEXT_DEBUG_DESCR" >
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		
+		
+		<field type="spacer" name="URL_RULES" class="text" label="URL_RULES"/>
+		<field name="IS_ARTICLE_RULE" type="textarea" cols="40" rows="3" default="option=com_content&amp;view=article,option=com_flexicontent&amp;view=items" label="ARTICLE_PAGE_RULES"
+				description="ARTICLE_PAGE_RULES_DESCR"/>
+		<field name="is_blog_rule" type="textarea" cols="40" rows="3" default="option=com_content&amp;view=featured,option=com_content&amp;layout=blog" label="BLOG_PAGE_RULES"
+				description="BLOG_PAGE_RULES_DESCR"/>
+	</fieldset>
+	<fieldset name="advanced">
+		<field name="only_tagged" type="radio" default="0" label="APPLY_ONLY_TO_CONTENT_WITH" 
+			description="APPLY_ONLY_TO_CONTENT_WITH_DESCR" >
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field name="exclude_tagged" type="radio" default="1" label="EXCLUDE_PAGES_WITH" 
+			description="EXCLUDE_PAGES_WITH_DESCR" >
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field name="error_msg" type="list" default="text" label="ERROR_MESSAGES"
+			description="ERROR_MESSAGES_DESCR">
+			<option value="popup">ERROR_MESSAGES_POPUP_ALERTS</option>
+			<option value="text">ERROR_MESSAGES_SHOW_AS_TEXT</option>
+			<option value="off">ERROR_MESSAGES_DONT_DISPLAY_MESSAGES</option>
+		</field>
+		<field name="time_limit" type="text" default="" label="PHP_MAXIMUM_EXECUTION_LIMIT" 
+			description="PHP_MAXIMUM_EXECUTION_LIMIT_DESCR">
+		</field>
+		<field name="memory_limit" type="list" default="default" label="PHP_MEMORY_LIMIT" 
+			description="PHP_MEMORY_LIMIT_DESCR">
+			<option value="default">DEFAULT_MEMORY_SIZE</option>
+			<option value="16M">16 MB</option>
+			<option value="32M">32 MB</option>
+			<option value="64M">64 MB</option>
+			</field>
+	</fieldset>
+</fields>
+</config>
+</extension>
