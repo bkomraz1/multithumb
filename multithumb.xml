@@ -2,12 +2,12 @@
 <extension version="1.6" type="plugin" group="content"	method="upgrade">
 	<name>Multithumb</name>
 	<author>Boris Komraz | Until Version 2.0 alpha 3 for Joomla 1.5 Martin Larsen</author>
-	<creationDate>2015-Jun-25</creationDate>
+	<creationDate>2015-Jul-10</creationDate>
 	<copyright>(C) 2007-2008 Martin Larsen, (C) 2009-2015 Boris Komraz</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>bkomraz1@gmail.com</authorEmail>
 	<authorUrl>http://joomla.rjews.net/bk-multithumb</authorUrl>
-	<version>3.7.2</version>
+	<version>3.7.4</version>
 	<description>MULTITHUMB_DESCR</description>
 	<updateservers>
 		<server type="extension"
@@ -739,6 +739,11 @@
 		</field>
 		<field name="exclude_tagged" type="radio" default="1" label="EXCLUDE_PAGES_WITH" 
 			description="EXCLUDE_PAGES_WITH_DESCR" >
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field name="disable_image_cache_link" type="radio" default="0" label="DISABLE_IMAGE_CACHE_LINK"
+			   description="DISABLE_IMAGE_CACHE_LINK_DESCR" >
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
 		</field>
