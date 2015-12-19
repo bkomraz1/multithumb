@@ -742,10 +742,11 @@
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
 		</field>
-		<field name="disable_image_cache_link" type="radio" default="0" label="DISABLE_IMAGE_CACHE_LINK"
+		<field name="disable_image_cache_link" type="list" default="0" label="DISABLE_IMAGE_CACHE_LINK"
 			   description="DISABLE_IMAGE_CACHE_LINK_DESCR" >
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
+			<option value="2">DISABLE_AND_REMOVE</option>
 		</field>
 		<field name="error_msg" type="list" default="text" label="ERROR_MESSAGES"
 			description="ERROR_MESSAGES_DESCR">

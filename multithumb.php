@@ -121,7 +121,7 @@ class plgContentMultithumb extends JPlugin
             symlink(JPATH_CACHE . "/multithumb_thumbs", JPATH_BASE . "/images/multithumb_thumbs");
         }
 
-        if ( $this->_params->get('disable_image_cache_link') && is_link(JPATH_BASE . "/images/multithumb_thumbs")) {
+        if ( $this->_params->get('disable_image_cache_link') == 2 && is_link(JPATH_BASE . "/images/multithumb_thumbs")) {
             unlink(JPATH_BASE . "/images/multithumb_thumbs");
         }
 
