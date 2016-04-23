@@ -61,7 +61,7 @@ class plgContentMultithumb extends JPlugin
     {
 
         // Current version for infornation message
-        $this->botmtversion = 'Multithumb 3.7.4';
+        $this->botmtversion = 'Multithumb 3.7.3';
 
         // Don't initialize anymore if plugin is disabled
         $this->published = JPluginHelper::isEnabled('content', 'multithumb');

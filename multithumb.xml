@@ -7,7 +7,7 @@
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>bkomraz1@gmail.com</authorEmail>
 	<authorUrl>http://joomla.rjews.net/bk-multithumb</authorUrl>
-	<version>3.7.4</version>
+	<version>3.7.3</version>
 	<description>MULTITHUMB_DESCR</description>
 	<updateservers>
 		<server type="extension"
