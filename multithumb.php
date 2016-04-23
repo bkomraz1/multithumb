@@ -20,7 +20,7 @@ require_once JPATH_SITE . '/components/com_content/helpers/route.php';
 class plgContentMultithumb extends JPlugin
 {
 
-    function plgContentMultithumb(&$subject, $config)
+    function __construct(&$subject, $config)
     {
         // public function __construct(& $subject, $config) {
         // Iniatialize parent class
