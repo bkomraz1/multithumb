@@ -14,11 +14,18 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.event.plugin');
 jimport('joomla.document.document');
 
-require_once JPATH_SITE . '/components/com_content/helpers/route.php';
+if (version_compare(JVERSION, '4.0.0', '>=')) {
+    require_once JPATH_LIBRARIES . '/classmap.php';
+} else {
+    require_once(JPATH_SITE . '/components/com_content/helpers/route.php');
+}
+
 
 // BK-Thumb plugin implementation
 class plgContentMultithumb extends JPlugin
 {
+
+    var JRegistry $_params;
 
     function __construct(&$subject, $config)
     {
