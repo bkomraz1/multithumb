@@ -7,12 +7,12 @@
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>bkomraz1@gmail.com</authorEmail>
 	<authorUrl>http://joomla.rjews.net/bk-multithumb</authorUrl>
-	<version>3.7.3</version>
+	<version>4.0.1</version>
 	<description>MULTITHUMB_DESCR</description>
 	<updateservers>
 		<server type="extension"
 				priority="1"
-				name="Joomla.Rjews.Net">http://joomla.rjews.net/multithumb.xml</server>
+				name="Joomla.Rjews.Net">https://raw.githubusercontent.com/bkomraz1/joomla-updates/main/multithumb.xml</server>
 	</updateservers>	
 	<files>
 		<filename plugin="multithumb">multithumb.php</filename>
