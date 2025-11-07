@@ -68,7 +68,7 @@ class plgContentMultithumb extends JPlugin
     {
 
         // Current version for infornation message
-        $this->botmtversion = 'Multithumb 3.7.3';
+        $this->botmtversion = 'Multithumb 4.0.1';
 
         // Don't initialize anymore if plugin is disabled
         $this->published = JPluginHelper::isEnabled('content', 'multithumb');
@@ -209,7 +209,21 @@ class plgContentMultithumb extends JPlugin
         }
 
         $this->_params->def('transparency_type', 'alpha');
-        $this->_params->set('transparent_color', hexdec($this->_params->get('transparent_color', '#000000')));
+        $transparent_color_hex = $this->_params->get('transparent_color', '#000000');
+        // Ensure we have a string value
+        if (!is_string($transparent_color_hex)) {
+            $transparent_color_hex = (string)$transparent_color_hex;
+        }
+        // Strip '#' if present and ensure valid hex string
+        $transparent_color_hex = ltrim($transparent_color_hex, '#');
+        // Remove any whitespace
+        $transparent_color_hex = trim($transparent_color_hex);
+        // Only convert if it's a valid hex string, otherwise default to black
+        if (!empty($transparent_color_hex) && ctype_xdigit($transparent_color_hex)) {
+            $this->_params->set('transparent_color', hexdec($transparent_color_hex));
+        } else {
+            $this->_params->set('transparent_color', hexdec('000000'));
+        }
         $this->_params->def('transparency', '25');
 
         $this->_params->def('error_msg', 'text');
@@ -1276,7 +1290,13 @@ document.write(\'<link rel="stylesheet" href="' . $this->_live_site . '/plugins/
         $dummy = "";
         // Resize image and/or set watermark
 
-        $imgtemp = self::botmt_thumbnail($imgurl, $full_width, $full_height, $this->_params->get('image_proportions'), hexdec($this->_params->get('image_bg')), (int)($this->watermark >= 1), 'images', 0, /* $size, */
+        $image_bg = $this->_params->get('image_bg', '#FFFFFF');
+        if (!is_string($image_bg)) {
+            $image_bg = (string)$image_bg;
+        }
+        $image_bg = ltrim(trim($image_bg), '#');
+        $image_bg_hex = (!empty($image_bg) && ctype_xdigit($image_bg)) ? $image_bg : 'FFFFFF';
+        $imgtemp = self::botmt_thumbnail($imgurl, $full_width, $full_height, $this->_params->get('image_proportions'), hexdec($image_bg_hex), (int)($this->watermark >= 1), 'images', 0, /* $size, */
             $this->_params->get('img_type', ""), 0, $dummy, $this);
 
         // If image resized or watermarked use it instead of the original one
@@ -1388,7 +1408,13 @@ document.write(\'<link rel="stylesheet" href="' . $this->_live_site . '/plugins/
                     ($this->popup_type != "expando");
 
 
-                $temp_file = self::botmt_thumbnail($imgurlOrg, $thumb_width, $thumb_height, $this->_params->get('thumb_proportions'), hexdec($this->_params->get('thumb_bg')), (int)($this->watermark == 2), 'thumbs', $this->popup_type == "expando", /* $size, */
+                $thumb_bg = $this->_params->get('thumb_bg', '#FFFFFF');
+                if (!is_string($thumb_bg)) {
+                    $thumb_bg = (string)$thumb_bg;
+                }
+                $thumb_bg = ltrim(trim($thumb_bg), '#');
+                $thumb_bg_hex = (!empty($thumb_bg) && ctype_xdigit($thumb_bg)) ? $thumb_bg : 'FFFFFF';
+                $temp_file = self::botmt_thumbnail($imgurlOrg, $thumb_width, $thumb_height, $this->_params->get('thumb_proportions'), hexdec($thumb_bg_hex), (int)($this->watermark == 2), 'thumbs', $this->popup_type == "expando", /* $size, */
                     $this->_params->get('img_type', ""), $zoomin, $iptc_caption, $this);
 
 
@@ -2383,7 +2409,13 @@ document.write(\'<link rel="stylesheet" href="' . $this->_live_site . '/plugins/
     	}
 
     	// Resize image and/or set watermark
-    	$imgtemp = $this->botmt_thumbnail($imgurl, $full_width, $full_height, $this->_params->get('image_proportions'), hexdec($this->_params->get('image_bg')), (int)($this->_watermark >= 1), 'images', 0 , $this->_params->get('img_type', "") );
+    	$image_bg = $this->_params->get('image_bg', '#FFFFFF');
+    	if (!is_string($image_bg)) {
+    	    $image_bg = (string)$image_bg;
+    	}
+    	$image_bg = ltrim(trim($image_bg), '#');
+    	$image_bg_hex = (!empty($image_bg) && ctype_xdigit($image_bg)) ? $image_bg : 'FFFFFF';
+    	$imgtemp = $this->botmt_thumbnail($imgurl, $full_width, $full_height, $this->_params->get('image_proportions'), hexdec($image_bg_hex), (int)($this->_watermark >= 1), 'images', 0 , $this->_params->get('img_type', "") );
 
     	// If image resized or watermarked use it instead of the original one
     	if($imgtemp) {

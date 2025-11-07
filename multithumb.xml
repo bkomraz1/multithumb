@@ -2,7 +2,7 @@
 <extension version="1.6" type="plugin" group="content"	method="upgrade">
 	<name>Multithumb</name>
 	<author>Boris Komraz | Until Version 2.0 alpha 3 for Joomla 1.5 Martin Larsen</author>
-	<creationDate>2016-Apr-24</creationDate>
+	<creationDate>2025-Nov-07</creationDate>
 	<copyright>(C) 2007-2008 Martin Larsen, (C) 2009-2016 Boris Komraz</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>bkomraz1@gmail.com</authorEmail>
